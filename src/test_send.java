@@ -177,8 +177,6 @@ public class test_send {
 		   sock = new Socket("localhost", 9999);
 		   System.out.println(sock + ": ¿¬°áµÊ");
 		   new login_test2();
-		   new test_mainroom();
-		   new test_waitingroom();
 		   new Client(sock);
 		}
 		}

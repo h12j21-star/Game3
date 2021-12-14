@@ -39,9 +39,9 @@ public class Client {
 			     else if(temp_arr[0].equals("300")) {
 			    	 //String ID;
 			    	 JOptionPane.showMessageDialog(null,"초대성공","Message",JOptionPane.INFORMATION_MESSAGE);
-			    	// test_mainroom.roomM();
 			    	 test_mainroom.roomId(Integer.toString(i));
 			    	 i++;
+			    	 new test_mainroom();
 			     }
 			     else if(temp_arr[0].equals("305")) {
 			    	 JOptionPane.showMessageDialog(null,"초대실패","Message",JOptionPane.ERROR_MESSAGE);
