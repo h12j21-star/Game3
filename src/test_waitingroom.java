@@ -24,8 +24,8 @@ public class test_waitingroom extends JFrame implements ActionListener{
 	static JTextArea chatting = new JTextArea(7,20); // 채팅이 보여지는 부분
 	JScrollPane scrollPane = new JScrollPane(chatting); // 채팅의 스크린
 	
-	static ImageIcon icon1 = new ImageIcon("image/premium-icon-user-5461392.png"); //사용자 사진
-	static ImageIcon icon2 = new ImageIcon("image/premium-icon-user-5461392.png"); //사용자 사진
+	static ImageIcon icon1 = new ImageIcon("image/game_rule.png"); //사용자 사진
+	
 	Button L1 = new Button("User update"); //사진 설정
 	Button manual = new Button("Game manual"); // 버튼 누르면 이동
 	static Button exit = new Button("Exit Program"); // 나가기 버튼 누르면 로그인창으로 이동
@@ -35,7 +35,7 @@ public class test_waitingroom extends JFrame implements ActionListener{
 	static JScrollPane scrollPane2 = new JScrollPane(info); //player스크롤
 	static String message;
 	static Button invite = new Button("초대하기"); // 버튼 누르면 이동
-	//static Button exit2 = new Button("취소"); // 나가기 버튼 누르면 로그인창으로 이동
+	//static Button exit2` = new Button("취소"); // 나가기 버튼 누르면 로그인창으로 이동
 	static Font f1 = new Font("Aharoni 굵게",Font.BOLD,13);
 	Socket socket = null;
 	
@@ -210,6 +210,7 @@ public class test_waitingroom extends JFrame implements ActionListener{
 			m.setVisible(true);m.setSize(200,200);
 			m.add(m_info);m.setResizable(false);
 			m.setLocationRelativeTo(null);
+	
 		}
 		//player list가 업데이트 된다.
 		else if(e.getSource()==L1) {
@@ -263,32 +264,6 @@ public class test_waitingroom extends JFrame implements ActionListener{
 	//초대 메시지(내가 받는 상황)
 	public static void setReceiveInvite(String nickname) {
 		otherInviteNick = nickname;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		JHhU
 	}
 	public static String getOtherInvite() {
 		return otherInviteNick;

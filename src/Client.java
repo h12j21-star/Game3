@@ -1,23 +1,42 @@
 
+import java.awt.HeadlessException;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-public class Client {
-	public Client(Socket sock) throws UnknownHostException, IOException {
-		OutputStream toServer = sock.getOutputStream();
-		InputStream inputStream = sock.getInputStream();	
-		int i=2;
-		byte[] buf = new byte[1024];			int count;
-	while((count = inputStream.read(buf))!=-1) {
+class Client extends Thread {
+	Socket sock = null;
+
+	
+	public Client(Socket sock) {
+		this.sock = sock;
+	}
+public void run() {
+	InputStream fromServer = null;
+	try {
+		fromServer = sock.getInputStream();
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	
+	byte[] buf = new byte[1024];
+	int count;
+	try {
+	while((count = fromServer.read(buf))!=-1) {
 			 String temp = new String(buf);
 		    String temp_new = temp.substring(0,temp.indexOf("\n"));
 		     String[] temp_arr = temp_new.split(" ");
 			     //로그인 성공
 			     if(temp_arr[0].equals("100")) {
-			    	 new test_waitingroom();
+			    	 try {
+						new test_waitingroom();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			     }
 			     //로그인실패
 			     else if(temp_arr[0].equals("105")) {
@@ -26,7 +45,12 @@ public class Client {
 			     //회원가입성공
 			     else if(temp_arr[0].equals("200")) {
 			    	 JOptionPane.showMessageDialog(null,"회원가입 성공 로그인 해주세요","Message",JOptionPane.INFORMATION_MESSAGE);
-		    		 new login_test2();
+		    		 try {
+						new login_test2();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			     }
 			     //정보가 이미존재
 			     else if(temp_arr[0].equals("205")) {
@@ -39,9 +63,14 @@ public class Client {
 			     else if(temp_arr[0].equals("300")) {
 			    	 //String ID;
 			    	 JOptionPane.showMessageDialog(null,"초대성공","Message",JOptionPane.INFORMATION_MESSAGE);
-			    	 test_mainroom.roomId(Integer.toString(i));
-			    	 i++;
-			    	 new test_mainroom();
+			    	// test_mainroom.roomId(Integer.toString(i));
+			    	 //i++;
+			    	 try {
+						new test_mainroom();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			     }
 			     else if(temp_arr[0].equals("305")) {
 			    	 JOptionPane.showMessageDialog(null,"초대실패","Message",JOptionPane.ERROR_MESSAGE);
@@ -79,12 +108,22 @@ public class Client {
 			     //게임입장
 			     else if(temp_arr[0].equals("705")) {
 			    	 //게임 방 띄우기
-			    	 new test_mainroom();
+			    	 try {
+						new test_mainroom();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			     }
 			     //게임퇴장_메인
 			     else if(temp_arr[0].equals("710")) {
 			    	 test_waitingroom.exitUser(test_waitingroom.getMyNickname());
-			    	 new login_test2();
+			    	 try {
+						new login_test2();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			    	 
 			     }
 			     //게임 퇴장_2인
@@ -92,7 +131,12 @@ public class Client {
 			    	 //게임방 나가는 함수만들기
 			    	 //test_mainroom();-> vector.remove();
 			    	 
-			    	 new test_waitingroom();
+			    	 try {
+						new test_waitingroom();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			     }
 			     //게임승리
 			     else if(temp_arr[0].equals("800")) {
@@ -140,9 +184,22 @@ public class Client {
 			     }
 			     else if(temp_arr[0].equals("2000")) {
 			    	 System.out.println("잘못된 프로토콜사용");
-			     }     
-				
-			}
-		}
+			     }
+	}
+	} catch (HeadlessException | IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+			    	 try {
+			    		 if(fromServer !=null) {
+			    			 fromServer.close();
+			    		 }
+			    		 if(sock != null) {
+			    			 sock.close();
+			    		 }
+			    	 }catch(IOException ex) {
+			    			 
+			    	 }
+	}
+	}
 }
-

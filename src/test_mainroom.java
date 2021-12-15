@@ -123,7 +123,7 @@ public class test_mainroom extends JFrame implements ActionListener{
 		//이름변경하는 
 		else if(e.getSource()==exit) {
 		 	try {
-		 	test_send.passWaitingRoom(c_name);
+		 	test_send.passWaitingRoom();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -142,7 +142,7 @@ public class test_mainroom extends JFrame implements ActionListener{
 		else if(e.getSource()== send) {
 			 chatting_msg  = tf.getText();
 			 try {
-				test_send.game_chatting(chatting_msg, getroomID());
+				test_send.game_chatting();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -150,7 +150,7 @@ public class test_mainroom extends JFrame implements ActionListener{
 		else if(e.getSource()== img1) {
 			
 			try {
-				test_send.gameroomUserInfo(getroomID());
+				test_send.gameroomUserInfo();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -158,14 +158,14 @@ public class test_mainroom extends JFrame implements ActionListener{
 		else if(e.getSource()== img2) {
 			
 			try {
-				test_send.gameroomUserInfo(getroomID());
+				test_send.gameroomUserInfo();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
 		else if(e.getSource() == change) {
 			try {
-				test_send.change_r_name(c_name); // 이름 변경 내용
+				test_send.change_r_name(); // 이름 변경 내용
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
